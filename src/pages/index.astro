@@ -1,0 +1,52 @@
+---
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/Hero.astro";
+import Services from "@/components/Services.astro";
+import CTA from "@/components/CTA.astro";
+
+const services = [
+  {
+    title: "Primary service",
+    description:
+      "The thing this client does best. Write this in plain language — the outcome for the customer, not the feature.",
+  },
+  {
+    title: "Secondary service",
+    description: "Short. Specific. Outcome-focused. Not feature-focused.",
+  },
+  {
+    title: "Tertiary service",
+    description: "Keep these to one sentence each.",
+  },
+  {
+    title: "Supporting offer",
+    description: "Only include if it's actually offered.",
+  },
+];
+---
+
+<Base
+  title="Client Name — short, benefit-driven title"
+  description="One-sentence description of what this business does and who it's for, under 155 characters."
+>
+  <Hero
+    eyebrow="Since 1995"
+    headline="The outcome the customer gets, stated plainly."
+    sub="One-sentence supporting line that says who it's for and why they should pick you."
+    ctaLabel="Book an appointment"
+    secondaryLabel="See our work"
+    secondaryHref="/services"
+  />
+
+  <Services
+    heading="What we do"
+    intro="Short paragraph that sets context for the services below. Don't repeat the hero."
+    services={services}
+  />
+
+  <CTA
+    headline="Ready to get started?"
+    sub="Short, direct, not pushy. Use the specific verb for what happens next."
+    ctaLabel="Book your visit"
+  />
+</Base>

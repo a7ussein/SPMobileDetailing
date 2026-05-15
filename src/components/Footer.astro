@@ -1,0 +1,41 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+  <div class="container-page section !py-12 grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+    <div>
+      <p class="font-display text-lg font-semibold">ClientName</p>
+      <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
+        One-line description of the business, pitched at the right audience.
+      </p>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold">Visit</p>
+      <address class="mt-2 text-sm not-italic text-[var(--color-ink-muted)]">
+        123 Main St<br />
+        City, ME 00000
+      </address>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold">Contact</p>
+      <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
+        <a href="tel:+12075550000" class="hover:text-[var(--color-ink)]">
+          (207) 555-0000
+        </a><br />
+        <a href="mailto:hello@example.com" class="hover:text-[var(--color-ink)]">
+          hello@example.com
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="container-page flex flex-col items-start justify-between gap-2 border-t border-[var(--color-border)] py-6 text-sm text-[var(--color-ink-muted)] md:flex-row md:items-center"
+  >
+    <p>&copy; {year} ClientName. All rights reserved.</p>
+    <p>Built by <a href="#" class="hover:text-[var(--color-ink)]">the studio</a>.</p>
+  </div>
+</footer>

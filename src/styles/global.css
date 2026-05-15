@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/* ---------- DESIGN TOKENS ----------
+ * Override these per-client. Everything downstream pulls from here.
+ * House-style rules live at G:\ClaudeConfig\skills\house-style\SKILL.md
+ */
+@theme {
+  /* Type */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Color — NEUTRAL (warm dark, not pure black) */
+  --color-bg: oklch(0.99 0.005 90);
+  --color-surface: oklch(0.97 0.01 90);
+  --color-ink: oklch(0.2 0.015 260);
+  --color-ink-muted: oklch(0.45 0.02 260);
+  --color-border: oklch(0.9 0.01 90);
+
+  /* Color — ACCENT (change per client) */
+  --color-accent: oklch(0.55 0.18 258);
+  --color-accent-hover: oklch(0.48 0.2 258);
+  --color-accent-soft: oklch(0.92 0.05 258);
+
+  /* Spacing — 8px grid by default */
+  --spacing: 0.25rem;
+
+  /* Radius — mix sharp and rounded deliberately */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ---------- BASE STYLES ---------- */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-bg);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+
+  body {
+    font-size: 1.0625rem; /* 17px — house default */
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  }
+  h2 {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
+  }
+  h3 {
+    font-size: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+  }
+
+  p {
+    max-width: 70ch;
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------- UTILITY COMPONENTS ---------- */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+
+    @media (min-width: 768px) {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .section {
+    padding-block: 4rem;
+
+    @media (min-width: 768px) {
+      padding-block: 6rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding-block: 8rem;
+    }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--color-accent);
+    color: white;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: background 200ms var(--ease-out-quart);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent-hover);
+  }
+}

@@ -1,0 +1,63 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  sub: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow,
+  headline,
+  sub,
+  ctaLabel = "Book now",
+  ctaHref = "/contact",
+  secondaryLabel,
+  secondaryHref,
+} = Astro.props;
+---
+
+<section class="section relative overflow-hidden">
+  <div class="container-page grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
+    <div>
+      {
+        eyebrow && (
+          <p class="mb-4 text-sm font-medium tracking-wide uppercase text-[var(--color-accent)]">
+            {eyebrow}
+          </p>
+        )
+      }
+      <h1 class="max-w-[18ch]">{headline}</h1>
+      <p
+        class="mt-6 text-lg text-[var(--color-ink-muted)] md:text-xl"
+      >
+        {sub}
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href={ctaHref} class="btn-primary">{ctaLabel}</a>
+        {
+          secondaryLabel && secondaryHref && (
+            <a
+              href={secondaryHref}
+              class="inline-flex items-center rounded-md px-6 py-3.5 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-surface)]"
+            >
+              {secondaryLabel} &nbsp;→
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Visual slot — replace with real imagery per client.
+         Do NOT ship the placeholder. -->
+    <div
+      class="aspect-[4/5] rounded-xl bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-surface)]"
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+</section>

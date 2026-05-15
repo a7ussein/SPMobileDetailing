@@ -1,0 +1,87 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+  title="Contact — Client Name"
+  description="Get in touch with Client Name. Address, phone, hours, and a contact form."
+>
+  <section class="section">
+    <div class="container-page grid gap-12 md:grid-cols-[1fr_1.2fr]">
+      <div>
+        <h1>Get in touch</h1>
+        <p class="mt-6 text-lg text-[var(--color-ink-muted)]">
+          One sentence about how you respond and when.
+        </p>
+
+        <dl class="mt-10 grid gap-6">
+          <div>
+            <dt class="text-sm font-semibold">Visit</dt>
+            <dd class="mt-1 text-[var(--color-ink-muted)]">
+              123 Main St<br />City, ME 00000
+            </dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold">Hours</dt>
+            <dd class="mt-1 text-[var(--color-ink-muted)]">
+              Mon–Fri · 9am–5pm<br />Sat · 10am–2pm
+            </dd>
+          </div>
+          <div>
+            <dt class="text-sm font-semibold">Call</dt>
+            <dd class="mt-1">
+              <a class="hover:underline" href="tel:+12075550000">(207) 555-0000</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <form
+        method="POST"
+        action="/api/contact"
+        class="grid gap-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:p-8"
+      >
+        <label class="grid gap-2">
+          <span class="text-sm font-medium">Name</span>
+          <input
+            required
+            type="text"
+            name="name"
+            class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 text-base"
+          />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="text-sm font-medium">Email</span>
+          <input
+            required
+            type="email"
+            name="email"
+            class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 text-base"
+          />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="text-sm font-medium">Phone (optional)</span>
+          <input
+            type="tel"
+            name="phone"
+            class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 text-base"
+          />
+        </label>
+
+        <label class="grid gap-2">
+          <span class="text-sm font-medium">How can we help?</span>
+          <textarea
+            required
+            name="message"
+            rows="5"
+            class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 text-base"
+          ></textarea>
+        </label>
+
+        <button type="submit" class="btn-primary justify-self-start">Send</button>
+      </form>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,36 @@
+---
+const links = [
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header class="border-b border-[var(--color-border)]">
+  <nav
+    class="container-page flex h-16 items-center justify-between gap-6"
+    aria-label="Primary"
+  >
+    <a href="/" class="font-display text-lg font-semibold tracking-tight">
+      <!-- Replace with client wordmark or SVG logo -->
+      ClientName
+    </a>
+
+    <ul class="hidden gap-8 md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="text-sm font-medium text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)]"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a href="/contact" class="btn-primary text-sm">Get in touch</a>
+  </nav>
+</header>

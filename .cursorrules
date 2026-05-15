@@ -1,0 +1,30 @@
+# Cursor rules — replace on first handoff
+
+This file is a placeholder. It gets regenerated from the studio's
+house-style skill the first time Claude runs the `handoff-package` skill
+in this project.
+
+Until then, follow these baseline rules:
+
+## Stack
+- Astro 5, Tailwind v4 (CSS-first `@theme`), React 19 islands, Motion
+- TypeScript strict, self-hosted Inter via @fontsource-variable
+
+## Design rules (short version — see house-style skill for full)
+- One accent color per project, generous whitespace, 8px grid
+- Typography: max 2 families, body ≥ 17px, line-height 1.6
+- Never centered hero with 3 identical feature cards
+- Never purple→pink gradient on CTAs
+- Motion purposeful, 150–250ms UI / 400–600ms enters, respect
+  prefers-reduced-motion
+- WCAG 2.2 AA contrast, keyboard nav, visible focus ring
+
+## Before commit
+- `npm run check` and `npm run build` must pass
+- Test at 375px and 1280px minimum
+
+## Source of truth
+`G:\ClaudeConfig\skills\house-style\SKILL.md`
+
+Run Claude's `handoff-package` skill any time the house-style changes to
+regenerate this file with the full current ruleset.
