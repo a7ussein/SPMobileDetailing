@@ -46,6 +46,14 @@ export default function BookingSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [botField, setBotField] = useState("");
+
+  const getLocalDateString = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
   /* -- section unlock logic (progressive reveal like 207) -- */
   const sectionServiceDone = !!selectedService;
@@ -78,10 +86,9 @@ export default function BookingSection() {
   const loadBookedSlots = useCallback(async (dateStr: string) => {
     try {
       const { data, error } = await supabase
-        .from("bookings")
+        .from("booked_slots")
         .select("time")
-        .eq("date", dateStr)
-        .neq("status", "cancelled");
+        .eq("date", dateStr);
       if (!error && data) setBookedSlots(data.map((b: { time: string }) => b.time));
       else setBookedSlots([]);
     } catch {
@@ -114,7 +121,7 @@ export default function BookingSection() {
     const d = new Date(calYear, calMonth, day);
     setSelectedDate(d);
     setSelectedTime(null);
-    await loadBookedSlots(d.toISOString().split("T")[0]);
+    await loadBookedSlots(getLocalDateString(d));
   };
 
   const prevMonth = () => {
@@ -126,6 +133,7 @@ export default function BookingSection() {
 
   /* -- submit booking to Supabase -- */
   const handleConfirm = async () => {
+    if (botField !== "") return; // Honeypot trap
     if (!name.trim()) { setError("Please enter your name."); return; }
     if (!phone.trim() || phone.length < 7) { setError("Please enter a valid phone number."); return; }
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
@@ -139,7 +147,7 @@ export default function BookingSection() {
     const { error: insertError } = await supabase.from("bookings").insert([{
       service: selectedService.name,
       price: selectedService.price,
-      date: selectedDate.toISOString().split("T")[0],
+      date: getLocalDateString(selectedDate),
       time: selectedTime,
       customer_name: name.trim(),
       customer_email: email.trim() || null,
@@ -487,6 +495,10 @@ export default function BookingSection() {
               <div className="sm:col-span-2">
                 <label style={labelStyle}>Notes <span style={{ fontSize: 11, color: "var(--color-ink-muted)" }}>(optional)</span></label>
                 <textarea value={notes} onChange={e => setNotes(e.target.value)} rows={3} placeholder="Pet hair, stains, specific areas of concern?" style={{ ...inputStyle, resize: "vertical" as const }} />
+              </div>
+              <div style={{ display: "none" }}>
+                <label>Do not fill this out</label>
+                <input type="text" value={botField} onChange={e => setBotField(e.target.value)} tabIndex={-1} autoComplete="off" />
               </div>
             </div>
 

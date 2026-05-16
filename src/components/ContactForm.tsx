@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 const schema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -24,11 +25,26 @@ export default function ContactForm() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (_data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    const { error } = await supabase.from('messages').insert([
+      {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        message: data.message,
+      }
+    ]);
+    
     setIsSubmitting(false);
+    
+    if (error) {
+      console.error("Error sending message:", error);
+      alert("There was an error sending your message. Please try again or call us.");
+      return;
+    }
+    
     setIsSuccess(true);
   };
 
