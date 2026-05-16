@@ -168,10 +168,13 @@ export default function BookingForm() {
             className="mt-2 block w-full rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] focus:outline-none"
           >
             <option value="">Select a service...</option>
-            <option value="exterior">Exterior Wash</option>
+            <option value="express">Express Detail</option>
             <option value="interior">Interior Detail</option>
-            <option value="full">Full Detail (Int + Ext)</option>
-            <option value="ceramic">Ceramic Sealant</option>
+            <option value="exterior">Exterior Detail</option>
+            <option value="full">Full In & Out Detail</option>
+            <option value="deep">Deep Clean Detail</option>
+            <option value="salt">Salt Removal Package</option>
+            <option value="maintenance">Maintenance Detail</option>
           </select>
           {errors.serviceType && (
             <p className="mt-1 text-sm text-[var(--color-accent)]">

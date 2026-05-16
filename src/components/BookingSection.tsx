@@ -5,9 +5,13 @@ import { parseTime, formatTime } from "@/lib/booking-utils";
 
 /* ===== SERVICES ===== */
 const services = [
-  { id: "exterior", name: "Exterior Wash", price: "$75", duration: "60 min", desc: "Hand wash, wheels, tires, glass" },
-  { id: "interior", name: "Interior Detail", price: "$120", duration: "90 min", desc: "Vacuum, plastics, spot treatment" },
-  { id: "full", name: "Full Detail", price: "$200", duration: "120 min", desc: "Complete interior + exterior reset" },
+  { id: "express", name: "Express Detail", price: "From $70", duration: "60 min", desc: "Quick vacuum, wipe down, wash, tire shine" },
+  { id: "interior", name: "Interior Detail", price: "From $110", duration: "90 min", desc: "Deep vacuum, cupholders, vents, mats" },
+  { id: "exterior", name: "Exterior Detail", price: "From $100", duration: "75 min", desc: "Foam wash, wheels, bug removal, spray wax" },
+  { id: "full", name: "Full In & Out", price: "From $160", duration: "120 min", desc: "Interior + exterior complete clean" },
+  { id: "deep", name: "Deep Clean Detail", price: "From $240", duration: "180 min", desc: "Shampoo seats/mats + full exterior" },
+  { id: "salt", name: "Salt Removal Package", price: "From $220", duration: "150 min", desc: "Heavy salt cleanup + carpet treatment" },
+  { id: "maintenance", name: "Maintenance Detail", price: "From $90", duration: "60 min", desc: "Monthly maintenance clean" },
 ];
 
 /* ===== TYPES ===== */

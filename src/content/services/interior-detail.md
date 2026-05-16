@@ -1,19 +1,11 @@
 ---
 title: "Interior Detail"
-description: "A comprehensive interior cleaning that restores your cabin to a fresh, like-new condition."
-order: 2
-price: "Starting at $150"
-duration: "2-4 hours"
+description: "Deep vacuum, wipe down, cupholders, vents, windows, and mat clean for a fresh, like-new cabin."
+price: "From $110"
 ---
 
-Our **Interior Detail** service transforms your vehicle's cabin. We deep clean every surface, crevice, and material to remove stains, odors, and dust, leaving your interior looking and smelling amazing.
+The **Interior Detail** is a thorough deep clean of your vehicle's entire cabin. We vacuum every surface including seats, carpets, and crevices, then wipe down all plastics, dashboards, door panels, and center consoles.
 
-### What's Included:
+Cupholders, vents, and hard-to-reach areas are carefully cleaned. Floor mats are scrubbed, and all interior glass is polished. The result is a cabin that feels and smells brand new.
 
-- Thorough vacuuming of seats, carpets, and floor mats
-- Deep cleaning of all plastics, vinyl, and leather
-- UV protection applied to hard surfaces
-- Streak-free interior glass cleaning
-- Spot treatment on fabrics
-
-_Prices vary based on vehicle size and condition._
+Perfect for daily drivers, family vehicles, and anyone who wants a fresh start on the inside.

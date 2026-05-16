@@ -12,44 +12,83 @@ import { business } from "@/lib/site";
 
 const services = [
   {
-    title: "Exterior Wash",
+    title: "Express Detail",
     description:
-      "Careful hand wash, wheel cleaning, and tire dressing without the swirl marks of a tunnel wash.",
-    price: "From $75",
+      "Quick vacuum, wipe down, windows, exterior wash, and tire shine. Great for maintenance washes.",
+    price: "From $70",
   },
   {
     title: "Interior Detail",
     description:
-      "Vacuuming, deep cleaning of plastics, and spot treatment where daily driving builds up.",
-    price: "From $120",
+      "Deep vacuum, wipe down, cupholders, vents, windows, and mat cleaning for a fresh cabin.",
+    price: "From $110",
+  },
+  {
+    title: "Exterior Detail",
+    description:
+      "Foam wash, wheels, tire shine, bug removal, and spray wax for a showroom-ready finish.",
+    price: "From $100",
+  },
+  {
+    title: "Full In & Out Detail",
+    description:
+      "Interior + exterior complete clean — our most popular package for a total reset.",
+    price: "From $160",
   },
 ];
 
 const tiers = [
   {
-    name: "Maintenance Wash",
-    price: "From $75",
-    description: "A thorough exterior refresh.",
+    name: "Express Detail",
+    price: "$70",
+    priceSuv: "$90",
+    description: "Good for maintenance washes between full details.",
     features: [
-      "Safe hand wash",
-      "Wheels & tires cleaned",
-      "Tire dressing applied",
-      "Exterior glass cleaned",
+      "Quick vacuum",
+      "Wipe down all surfaces",
+      "Windows cleaned",
+      "Exterior hand wash",
+      "Tire shine applied",
     ],
   },
   {
-    name: "Full Detail Reset",
-    price: "From $200",
+    name: "Full In & Out Detail",
+    price: "$160",
+    priceSuv: "$220",
     description: "Our most popular package for a complete reset.",
     isPopular: true,
     features: [
-      "Everything in Maintenance Wash",
-      "Deep interior vacuum",
-      "Plastics & vinyl cleaned",
-      "UV protection applied",
-      "Spray wax finish",
+      "Full interior detail",
+      "Full exterior detail",
+      "All surfaces cleaned",
+      "Tire shine & spray wax",
+      "Windows inside & out",
     ],
   },
+  {
+    name: "Deep Clean Detail",
+    price: "$240",
+    priceSuv: "$300",
+    description: "For neglected interiors and heavy winter salt buildup.",
+    features: [
+      "Shampoo seats & mats",
+      "Full exterior foam wash",
+      "Heavy soil treatment",
+      "Interior deep extraction",
+      "Salt removal included",
+    ],
+  },
+];
+
+const addOns = [
+  { name: "Pet Hair Removal", price: "$30–80" },
+  { name: "Seat Shampoo", price: "$40" },
+  { name: "Carpet Shampoo", price: "$50" },
+  { name: "Steam Cleaning", price: "$40" },
+  { name: "Engine Bay Detail", price: "$40" },
+  { name: "Spray Ceramic Protection", price: "$50" },
+  { name: "Odor Removal", price: "$40–75" },
+  { name: "Excessive Dirt Fee", price: "$25–75" },
 ];
 
 const faqs = [
@@ -64,6 +103,11 @@ const faqs = [
       "Depending on the size and condition of your vehicle, a full detail usually takes between 2 to 4 hours. We never rush the process, ensuring every inch meets our high standards.",
   },
   {
+    question: "Do you charge more for SUVs and trucks?",
+    answer:
+      "Yes, due to larger surface areas and interiors, SUVs and trucks are priced slightly higher. Each package clearly shows sedan and SUV/truck pricing so there are no surprises.",
+  },
+  {
     question: "Do you operate in the winter?",
     answer:
       "Yes! As long as the temperature is above freezing and there is no active precipitation, we can perform exterior details. Interior details can be performed year-round if we have shelter like a garage.",
@@ -72,6 +116,11 @@ const faqs = [
     question: "What areas do you serve?",
     answer:
       "We serve Portland, South Portland, Bangor, Lewiston, Augusta, and surrounding Maine communities. Contact us if you're outside these areas — we may still be able to accommodate you.",
+  },
+  {
+    question: "Can I add extras onto my package?",
+    answer:
+      "Absolutely! We offer add-ons like pet hair removal, seat shampoo, steam cleaning, engine bay detail, ceramic protection, and more. Just mention what you need when booking.",
   },
 ];
 
@@ -99,13 +148,25 @@ const localBusinessSchema = {
 
 <Base
   title="SP Mobile Detailing — Premium Mobile Car Detailing in Maine"
-  description="SP Mobile Detailing brings premium exterior washes and interior details directly to your driveway in Maine."
+  description="SP Mobile Detailing brings express washes, full in & out details, deep cleans, and premium add-ons directly to your driveway in Central Maine. 10% off your first detail."
   jsonLd={localBusinessSchema}
 >
+  <!-- First-time customer promo banner -->
+  <div
+    class="relative z-40 overflow-hidden bg-[var(--color-accent)] py-2.5 text-center text-sm font-semibold tracking-wide text-white"
+  >
+    <span class="animate-[fadeUp_0.5s_ease-out_both]"
+      >🎉 First-Time Customer? Get <strong>10% Off</strong> Your First Detail —
+      <a href="#book" class="underline underline-offset-2 hover:opacity-90"
+        >Book Now</a
+      ></span
+    >
+  </div>
+
   <Hero
-    eyebrow="Mobile detailing · Maine"
+    eyebrow="Central Maine Mobile Detailing"
     headline="Your car, detailed at your door."
-    sub="Premium mobile detailing — hand washes and interior resets brought directly to your driveway."
+    sub="In & out detailing — express washes, full details, and deep cleans brought directly to your driveway."
     ctaLabel="Book your detail"
     ctaHref="#book"
     secondaryLabel="See pricing"
@@ -115,8 +176,8 @@ const localBusinessSchema = {
   <TrustStrip />
 
   <Services
-    heading="Clear pricing. No upsell."
-    intro="Simple service options, careful process, and a clean handoff. No tunnel-wash shortcuts."
+    heading="In & Out Detailing. Clear pricing."
+    intro="Simple packages from quick maintenance washes to heavy-duty deep cleans. Sedan and SUV/truck pricing — no surprises."
     services={services}
   />
 
@@ -159,8 +220,37 @@ const localBusinessSchema = {
 
   <PricingTiers tiers={tiers} />
 
+  <!-- Add-Ons section -->
+  <section class="section" id="addons">
+    <div class="container-page">
+      <div class="mx-auto mb-14 max-w-2xl text-center">
+        <p class="eyebrow mb-4">Add-Ons</p>
+        <h2>Customize your detail.</h2>
+        <p class="mx-auto mt-5 text-lg text-[var(--color-ink-muted)]">
+          Simple upsells to get exactly the clean you need. Add any of these to
+          your chosen package.
+        </p>
+      </div>
+
+      <div class="mx-auto grid max-w-3xl gap-3 sm:grid-cols-2">
+        {
+          addOns.map((addon) => (
+            <div class="flex items-center justify-between rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-5 py-4 transition-shadow hover:shadow-[var(--shadow-card)]">
+              <span class="text-sm font-medium text-[var(--color-ink)]">
+                {addon.name}
+              </span>
+              <span class="text-sm font-bold tracking-wide text-[var(--color-accent)]">
+                {addon.price}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- Inline booking section -->
-  <section class="section" id="book">
+  <section class="section bg-[var(--color-surface)]" id="book">
     <div class="container-page">
       <div class="mx-auto mb-12 max-w-2xl text-center">
         <p class="eyebrow mb-4">Booking</p>
@@ -168,13 +258,19 @@ const localBusinessSchema = {
         <p class="mt-5 text-lg text-[var(--color-ink-muted)]">
           Pick your service, choose a date and time, and you're booked.
         </p>
+        <!-- Promo reminder -->
+        <p
+          class="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent-soft)] px-4 py-2 text-sm font-semibold text-[var(--color-accent)]"
+        >
+          🎉 10% off your first detail
+        </p>
       </div>
       <BookingSection client:visible />
     </div>
   </section>
 
   <!-- FAQ section -->
-  <section class="section bg-[var(--color-surface)]">
+  <section class="section">
     <div class="container-page">
       <div class="mx-auto mb-12 max-w-2xl text-center">
         <p class="eyebrow mb-4">Questions</p>
@@ -189,7 +285,7 @@ const localBusinessSchema = {
 
   <CTA
     headline="Send the vehicle details. Ahmad will take it from there."
-    sub="Tell us what you drive, where it's parked, and what level of clean you want."
+    sub="Tell us what you drive, where it's parked, and what level of clean you want. First-time customers get 10% off."
     ctaLabel="Book your detail"
     ctaHref="#book"
   />
