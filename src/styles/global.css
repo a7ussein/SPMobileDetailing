@@ -157,7 +157,7 @@
 
   .btn-secondary:hover {
     border-color: var(--color-chrome-muted);
-    background: rgb(255 255 255 / 0.04);
+    background: rgb(0 0 0 / 0.04);
     transform: translateY(-1px);
   }
 
@@ -209,7 +209,7 @@
 
   /* ---------- GLASSMORPHISM ---------- */
   .glass {
-    background: rgb(8 8 8 / 0.75);
+    background: rgb(255 255 255 / 0.85);
     backdrop-filter: blur(20px) saturate(1.6);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
   }

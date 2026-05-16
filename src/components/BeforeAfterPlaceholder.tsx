@@ -7,7 +7,7 @@ export default function BeforeAfterPlaceholder() {
           <span className="mb-3 inline-flex items-center rounded-sm bg-[var(--color-ink)] px-3 py-1 text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--color-bg)]">
             Before
           </span>
-          <p className="text-sm text-[var(--color-ink-muted)]">
+          <p className="text-sm text-white/80">
             Swirl marks &amp; oxidation
           </p>
         </div>
