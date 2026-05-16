@@ -1,0 +1,24 @@
+---
+import Base from "@/layouts/Base.astro";
+import { business } from "@/lib/site";
+import BookingSection from "@/components/BookingSection";
+---
+
+<Base
+  title={`Book an Appointment — ${business.name}`}
+  description={`Schedule your mobile car detailing service with ${business.name}. We come to you in Portland, Bangor, Lewiston, Augusta, and surrounding areas.`}
+>
+  <section class="section pt-32">
+    <div class="container-page">
+      <div class="mx-auto mb-12 max-w-2xl text-center">
+        <p class="eyebrow mb-4">Booking</p>
+        <h1>Book your detail</h1>
+        <p class="mx-auto mt-6 text-lg text-[var(--color-ink-muted)]">
+          Pick your service, choose a date and time, and you're booked. Ahmad
+          will confirm your appointment.
+        </p>
+      </div>
+      <BookingSection client:load />
+    </div>
+  </section>
+</Base>

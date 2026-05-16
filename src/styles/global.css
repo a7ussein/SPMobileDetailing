@@ -1,41 +1,9 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/cormorant-garamond";
 
-/* ---------- DESIGN TOKENS ----------
- * Override these per-client. Everything downstream pulls from here.
- * House-style rules live at G:\ClaudeConfig\skills\house-style\SKILL.md
- */
-@theme {
-  /* Type */
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-
-  /* Color — NEUTRAL (warm dark, not pure black) */
-  --color-bg: oklch(0.99 0.005 90);
-  --color-surface: oklch(0.97 0.01 90);
-  --color-ink: oklch(0.2 0.015 260);
-  --color-ink-muted: oklch(0.45 0.02 260);
-  --color-border: oklch(0.9 0.01 90);
-
-  /* Color — ACCENT (change per client) */
-  --color-accent: oklch(0.55 0.18 258);
-  --color-accent-hover: oklch(0.48 0.2 258);
-  --color-accent-soft: oklch(0.92 0.05 258);
-
-  /* Spacing — 8px grid by default */
-  --spacing: 0.25rem;
-
-  /* Radius — mix sharp and rounded deliberately */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-full: 9999px;
-
-  /* Motion */
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-}
+/* ---------- DESIGN TOKENS ---------- */
+@import "./brand/tokens.css";
 
 /* ---------- BASE STYLES ---------- */
 @layer base {
@@ -46,32 +14,39 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "cv11", "ss01", "ss03";
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
     font-size: 1.0625rem; /* 17px — house default */
     line-height: 1.6;
+    min-height: 100vh;
+    background: var(--color-bg);
   }
 
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
     text-wrap: balance;
+    color: var(--color-ink);
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    font-size: clamp(3rem, 6vw + 0.5rem, 6.5rem);
+    font-weight: 400;
+    font-style: italic;
   }
   h2 {
-    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
+    font-size: clamp(2rem, 3vw + 0.5rem, 3.75rem);
+    font-style: italic;
   }
   h3 {
-    font-size: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+    font-size: clamp(1.25rem, 1vw + 0.75rem, 1.75rem);
   }
 
   p {
@@ -94,6 +69,9 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
@@ -101,7 +79,7 @@
 @layer components {
   .container-page {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin-inline: auto;
     padding-inline: 1.5rem;
 
@@ -111,31 +89,128 @@
   }
 
   .section {
-    padding-block: 4rem;
+    padding-block: 5rem;
 
     @media (min-width: 768px) {
-      padding-block: 6rem;
+      padding-block: 7rem;
     }
 
     @media (min-width: 1280px) {
-      padding-block: 8rem;
+      padding-block: 9rem;
     }
   }
 
+  /* ---------- BUTTONS ---------- */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
+    min-height: 3.25rem;
+    padding: 0.875rem 2.25rem;
     background: var(--color-accent);
-    color: white;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: background 200ms var(--ease-out-quart);
+    color: var(--color-accent-ink);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    box-shadow:
+      0 2px 8px rgb(200 16 46 / 0.3),
+      inset 0 1px 0 rgb(255 255 255 / 0.1);
+    transition:
+      background 200ms var(--ease-out-quart),
+      box-shadow 200ms var(--ease-out-quart),
+      transform 200ms var(--ease-out-quart);
   }
 
   .btn-primary:hover {
     background: var(--color-accent-hover);
+    box-shadow:
+      0 4px 20px rgb(200 16 46 / 0.4),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3.25rem;
+    padding: 0.875rem 2.25rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    transition:
+      border-color 200ms var(--ease-out-quart),
+      background 200ms var(--ease-out-quart),
+      transform 200ms var(--ease-out-quart);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-chrome-muted);
+    background: rgb(255 255 255 / 0.04);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- CARDS ---------- */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition:
+      box-shadow 300ms var(--ease-out-quart),
+      border-color 300ms var(--ease-out-quart),
+      transform 300ms var(--ease-out-quart);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-chrome-muted);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- TEXT UTILITIES ---------- */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .rule-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-ink-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .rule-label::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  /* ---------- GLASSMORPHISM ---------- */
+  .glass {
+    background: rgb(8 8 8 / 0.75);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
   }
 }

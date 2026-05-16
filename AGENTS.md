@@ -9,10 +9,12 @@ until the handoff skill has run and rewritten this file with the full
 current ruleset.
 
 ## Stack
+
 - Astro 5, Tailwind v4 (CSS-first `@theme`), React 19 islands, Motion
 - TypeScript strict, self-hosted Inter via @fontsource-variable
 
 ## Design rules (short version — full rules at the source below)
+
 - One accent color per project, generous whitespace, 8px grid
 - Typography: max 2 families, body ≥ 17px, line-height 1.6
 - Never centered hero with 3 identical feature cards
@@ -23,11 +25,13 @@ current ruleset.
 - Never ship placeholder copy or the stand-in hero gradient
 
 ## Before any commit
+
 - `npm run check` and `npm run build` must pass
 - Test at 375px and 1280px minimum
 - If the commit touches design tokens, verify contrast at WCAG AA
 
 ## Source of truth
+
 `G:\ClaudeConfig\skills\house-style\SKILL.md`
 
 If you (the agent) discover a rule that should be universal across

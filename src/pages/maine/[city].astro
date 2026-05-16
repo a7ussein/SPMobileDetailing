@@ -1,0 +1,83 @@
+---
+import type { InferGetStaticPropsType } from "astro";
+import { getCollection, render } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/Hero.astro";
+import TrustStrip from "@/components/TrustStrip.astro";
+import CTA from "@/components/CTA.astro";
+import { business } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const cities = await getCollection("cities");
+  return cities.map((city) => ({
+    params: { city: city.id },
+    props: { city },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { city } = Astro.props as Props;
+const { Content } = await render(city);
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: business.name,
+  description: city.data.description,
+  telephone: business.phone,
+  areaServed: {
+    "@type": "City",
+    name: city.data.name,
+    containedInPlace: {
+      "@type": "State",
+      name: city.data.state,
+    },
+  },
+  founder: {
+    "@type": "Person",
+    name: business.owner,
+  },
+  url: Astro.site
+    ? new URL(Astro.url.pathname, Astro.site).toString()
+    : Astro.url.href,
+};
+---
+
+<Base
+  title={`Mobile Car Detailing in ${city.data.name}, ${city.data.state} — ${business.name}`}
+  description={city.data.description}
+  jsonLd={localBusinessSchema}
+>
+  <Hero
+    eyebrow={`Mobile Detailing · ${city.data.name}`}
+    headline={`Showroom finish, at your door in ${city.data.name}.`}
+    sub={city.data.description}
+    ctaLabel="Book your detail"
+    ctaHref="/book"
+    secondaryLabel="View services"
+    secondaryHref="/#services"
+  />
+
+  <TrustStrip />
+
+  <section class="section">
+    <div class="container-page max-w-3xl">
+      <div class="prose prose-invert prose-lg max-w-none [&_p]:text-[var(--color-ink-muted)] [&_h2]:font-display [&_h2]:italic [&_h2]:text-[var(--color-ink)] [&_h3]:text-[var(--color-ink)] [&_strong]:text-[var(--color-ink)] [&_li]:text-[var(--color-ink-muted)]">
+        <Content />
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/book" class="btn-primary"
+          >Book in {city.data.name}</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    headline="Ready for your car to feel brand new?"
+    sub={`Request an appointment and we'll come directly to your location in ${city.data.name}.`}
+    ctaLabel="Book your detail"
+    ctaHref="/book"
+  />
+</Base>

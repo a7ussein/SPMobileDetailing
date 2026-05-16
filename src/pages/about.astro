@@ -1,0 +1,58 @@
+---
+import Base from "@/layouts/Base.astro";
+import CTA from "@/components/CTA.astro";
+import { business } from "@/lib/site";
+---
+
+<Base
+  title={`About Ahmad & ${business.name}`}
+  description={`Learn about ${business.name}, a premium mobile car detailing service owned by Ahmad Alsaleh, serving Maine.`}
+>
+  <section class="section pt-32">
+    <div class="container-page grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
+      <div>
+        <p class="eyebrow mb-6">Locally Owned & Operated</p>
+        <h1>Meet Ahmad.</h1>
+        <p class="mt-6 text-lg text-[var(--color-ink-muted)]">
+          Hey, I'm Ahmad Alsaleh. I started SP Mobile Detailing because I saw a
+          gap in the Maine market for true, high-quality auto detailing that
+          comes directly to the customer.
+        </p>
+        <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+          As a car enthusiast, I know the damage that tunnel washes and improper
+          wash techniques can do to a vehicle's clear coat. My goal is to provide
+          a premium, scratch-free service that not only cleans your vehicle but
+          protects it for the long haul.
+        </p>
+        <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+          Whether you have a daily commuter that needs a deep interior reset or a
+          weekend car that needs ceramic protection, I treat every vehicle like
+          it's my own.
+        </p>
+      </div>
+
+      {/* TODO: Replace this placeholder with a real photo of Ahmad working or with his mobile setup */}
+      <div
+        class="card flex aspect-[4/5] w-full items-center justify-center p-8 text-center md:aspect-square"
+      >
+        <div>
+          <img
+            src="/sp-logo.png"
+            alt="SP Detailing"
+            class="mx-auto mb-6 h-32 w-auto object-contain opacity-60"
+          />
+          <p class="text-sm font-medium text-[var(--color-ink-muted)] opacity-70">
+            [Real photo of Ahmad coming soon]
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    headline="Let's get your car looking its best."
+    sub="Mobile detailing available in Portland, South Portland, Bangor, Lewiston, and Augusta."
+    ctaLabel="Book an appointment"
+    ctaHref="/book"
+  />
+</Base>

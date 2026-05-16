@@ -14,50 +14,115 @@ const {
   headline,
   sub,
   ctaLabel = "Book now",
-  ctaHref = "/contact",
+  ctaHref = "/book",
   secondaryLabel,
   secondaryHref,
 } = Astro.props;
 ---
 
-<section class="section relative overflow-hidden">
-  <div class="container-page grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
-    <div>
+<section
+  class="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pt-24 pb-16"
+>
+  <!-- Background glow effect -->
+  <div
+    class="pointer-events-none absolute inset-0"
+    aria-hidden="true"
+  >
+    <div class="absolute top-1/4 left-1/2 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.04] blur-[120px]"></div>
+  </div>
+
+  <div class="container-page relative z-10 text-center">
+    {
+      eyebrow && (
+        <p class="eyebrow mb-8 animate-[fadeUp_0.6s_ease-out_both]">
+          {eyebrow}
+        </p>
+      )
+    }
+
+    <h1
+      class="mx-auto max-w-[14ch] animate-[fadeUp_0.7s_ease-out_0.1s_both]"
+    >
+      {headline}
+    </h1>
+
+    <p
+      class="mx-auto mt-8 max-w-xl animate-[fadeUp_0.7s_ease-out_0.2s_both] text-lg leading-relaxed text-[var(--color-ink-muted)] md:text-xl"
+    >
+      {sub}
+    </p>
+
+    <div
+      class="mt-10 flex animate-[fadeUp_0.7s_ease-out_0.3s_both] flex-wrap items-center justify-center gap-4"
+    >
+      <a href={ctaHref} class="btn-primary text-sm">{ctaLabel}</a>
       {
-        eyebrow && (
-          <p class="mb-4 text-sm font-medium tracking-wide uppercase text-[var(--color-accent)]">
-            {eyebrow}
-          </p>
+        secondaryLabel && secondaryHref && (
+          <a href={secondaryHref} class="btn-secondary text-sm">
+            {secondaryLabel}
+          </a>
         )
       }
-      <h1 class="max-w-[18ch]">{headline}</h1>
-      <p
-        class="mt-6 text-lg text-[var(--color-ink-muted)] md:text-xl"
-      >
-        {sub}
-      </p>
-
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href={ctaHref} class="btn-primary">{ctaLabel}</a>
-        {
-          secondaryLabel && secondaryHref && (
-            <a
-              href={secondaryHref}
-              class="inline-flex items-center rounded-md px-6 py-3.5 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-surface)]"
-            >
-              {secondaryLabel} &nbsp;→
-            </a>
-          )
-        }
-      </div>
     </div>
 
-    <!-- Visual slot — replace with real imagery per client.
-         Do NOT ship the placeholder. -->
+    <!-- Stat strip -->
     <div
-      class="aspect-[4/5] rounded-xl bg-gradient-to-br from-[var(--color-accent-soft)] to-[var(--color-surface)]"
-      aria-hidden="true"
+      class="mx-auto mt-24 flex animate-[fadeUp_0.7s_ease-out_0.45s_both] flex-wrap items-center justify-center gap-x-8 gap-y-4 border-t border-[var(--color-border)] pt-8 text-sm font-medium text-[var(--color-ink-muted)]"
     >
+      <span class="flex items-center gap-2.5">
+        <span class="h-px w-4 bg-[var(--color-accent)]"></span>
+        Owner-Operated
+      </span>
+      <span class="flex items-center gap-2.5">
+        <span class="h-px w-4 bg-[var(--color-accent)]"></span>
+        Fully Mobile Setup
+      </span>
+      <span class="flex items-center gap-2.5">
+        <span class="h-px w-4 bg-[var(--color-accent)]"></span>
+        Serving All of Maine
+      </span>
     </div>
   </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-[bounce_2s_ease-in-out_infinite]"
+    aria-hidden="true"
+  >
+    <svg
+      class="h-5 w-5 text-[var(--color-ink-muted)] opacity-30"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
 </section>
+
+<style>
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(8px);
+    }
+  }
+</style>

@@ -3,50 +3,212 @@ import Base from "@/layouts/Base.astro";
 import Hero from "@/components/Hero.astro";
 import Services from "@/components/Services.astro";
 import CTA from "@/components/CTA.astro";
+import TrustStrip from "@/components/TrustStrip.astro";
+import PricingTiers from "@/components/PricingTiers.astro";
+import FaqAccordion from "@/components/FaqAccordion";
+import BeforeAfterPlaceholder from "@/components/BeforeAfterPlaceholder";
+import BookingSection from "@/components/BookingSection";
+import { business } from "@/lib/site";
 
 const services = [
   {
-    title: "Primary service",
+    title: "Exterior Wash",
     description:
-      "The thing this client does best. Write this in plain language — the outcome for the customer, not the feature.",
+      "Careful hand wash, wheel cleaning, and tire dressing without the swirl marks of a tunnel wash.",
+    price: "From $75",
   },
   {
-    title: "Secondary service",
-    description: "Short. Specific. Outcome-focused. Not feature-focused.",
+    title: "Interior Detail",
+    description:
+      "Vacuuming, deep cleaning of plastics, and spot treatment where daily driving builds up.",
+    price: "From $120",
   },
   {
-    title: "Tertiary service",
-    description: "Keep these to one sentence each.",
+    title: "Paint Decontamination",
+    description:
+      "Removal of embedded grit and iron fallout so your paint feels smooth like glass again.",
+    price: "From $150",
   },
   {
-    title: "Supporting offer",
-    description: "Only include if it's actually offered.",
+    title: "Ceramic Sealants",
+    description:
+      "Long-lasting protection and incredible gloss to defend against Maine's harsh weather.",
+    price: "From $300",
+  },
+  {
+    title: "Headlight Restoration",
+    description:
+      "Wet sanding and polishing to remove yellowing and restore clarity for safer night driving.",
+    price: "From $60",
   },
 ];
+
+const tiers = [
+  {
+    name: "Maintenance Wash",
+    price: "From $75",
+    description: "A thorough exterior refresh.",
+    features: [
+      "Safe hand wash",
+      "Wheels & tires cleaned",
+      "Tire dressing applied",
+      "Exterior glass cleaned",
+    ],
+  },
+  {
+    name: "Full Detail Reset",
+    price: "From $200",
+    description: "Our most popular package for a complete reset.",
+    isPopular: true,
+    features: [
+      "Everything in Maintenance Wash",
+      "Deep interior vacuum",
+      "Plastics & vinyl cleaned",
+      "UV protection applied",
+      "Spray wax finish",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: "Do I need to provide water or electricity?",
+    answer:
+      "No, our mobile unit is fully equipped with its own spot-free water supply and generator. We just need enough space to park near your vehicle and access to all doors.",
+  },
+  {
+    question: "How long does a full detail take?",
+    answer:
+      "Depending on the size and condition of your vehicle, a full detail usually takes between 2 to 4 hours. We never rush the process, ensuring every inch meets our high standards.",
+  },
+  {
+    question: "Do you operate in the winter?",
+    answer:
+      "Yes! As long as the temperature is above freezing and there is no active precipitation, we can perform exterior details. Interior details can be performed year-round if we have shelter like a garage.",
+  },
+  {
+    question: "What areas do you serve?",
+    answer:
+      "We serve Portland, South Portland, Bangor, Lewiston, Augusta, and surrounding Maine communities. Contact us if you're outside these areas — we may still be able to accommodate you.",
+  },
+];
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: business.name,
+  description: business.shortDescription,
+  telephone: business.phone,
+  email: business.email,
+  areaServed: [
+    "Portland ME",
+    "South Portland ME",
+    "Bangor ME",
+    "Lewiston ME",
+    "Augusta ME",
+  ],
+  founder: {
+    "@type": "Person",
+    name: business.owner,
+  },
+  url: Astro.site?.toString(),
+};
 ---
 
 <Base
-  title="Client Name — short, benefit-driven title"
-  description="One-sentence description of what this business does and who it's for, under 155 characters."
+  title="SP Mobile Detailing — Premium Mobile Car Detailing in Maine"
+  description="SP Mobile Detailing brings exterior washes, interior details, paint decontamination, sealants, and headlight restoration directly to your driveway in Maine."
+  jsonLd={localBusinessSchema}
 >
   <Hero
-    eyebrow="Since 1995"
-    headline="The outcome the customer gets, stated plainly."
-    sub="One-sentence supporting line that says who it's for and why they should pick you."
-    ctaLabel="Book an appointment"
-    secondaryLabel="See our work"
-    secondaryHref="/services"
+    eyebrow="Mobile detailing · Maine"
+    headline="Your car, detailed at your door."
+    sub="Premium mobile detailing — hand washes, interior resets, and ceramic protection brought directly to your driveway."
+    ctaLabel="Book your detail"
+    ctaHref="#book"
+    secondaryLabel="See pricing"
+    secondaryHref="#pricing"
   />
 
+  <TrustStrip />
+
   <Services
-    heading="What we do"
-    intro="Short paragraph that sets context for the services below. Don't repeat the hero."
+    heading="Clear pricing. No upsell."
+    intro="Simple service options, careful process, and a clean handoff. No tunnel-wash shortcuts."
     services={services}
   />
 
+  <!-- Before/After section -->
+  <section class="section bg-[var(--color-surface)]">
+    <div
+      class="container-page grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-center"
+    >
+      <div>
+        <p class="eyebrow mb-4">Finish quality</p>
+        <h2>Built around the details people actually notice.</h2>
+        <p class="mt-5 text-lg text-[var(--color-ink-muted)]">
+          The first impression is gloss, glass, wheels, touch points, and the
+          spaces that collect daily use.
+        </p>
+        <ul class="mt-8 space-y-4">
+          <li class="flex items-center gap-3">
+            <span class="h-px w-4 shrink-0 bg-[var(--color-accent)]"></span>
+            <span class="font-medium"
+              >Paint-conscious wash media and drying</span
+            >
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="h-px w-4 shrink-0 bg-[var(--color-accent)]"></span>
+            <span class="font-medium"
+              >Interior touch points, vents, mats, cupholders</span
+            >
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="h-px w-4 shrink-0 bg-[var(--color-accent)]"></span>
+            <span class="font-medium"
+              >Protection for salt, rain, and road film</span
+            >
+          </li>
+        </ul>
+      </div>
+      <BeforeAfterPlaceholder client:visible />
+    </div>
+  </section>
+
+  <PricingTiers tiers={tiers} />
+
+  <!-- Inline booking section -->
+  <section class="section" id="book">
+    <div class="container-page">
+      <div class="mx-auto mb-12 max-w-2xl text-center">
+        <p class="eyebrow mb-4">Booking</p>
+        <h2>One clear next step.</h2>
+        <p class="mt-5 text-lg text-[var(--color-ink-muted)]">
+          Pick your service, choose a date and time, and you're booked.
+        </p>
+      </div>
+      <BookingSection client:visible />
+    </div>
+  </section>
+
+  <!-- FAQ section -->
+  <section class="section bg-[var(--color-surface)]">
+    <div class="container-page">
+      <div class="mx-auto mb-12 max-w-2xl text-center">
+        <p class="eyebrow mb-4">Questions</p>
+        <h2>Frequently asked questions</h2>
+        <p class="mt-5 text-lg text-[var(--color-ink-muted)]">
+          Everything you need to know about our mobile detailing service.
+        </p>
+      </div>
+      <FaqAccordion faqs={faqs} client:visible />
+    </div>
+  </section>
+
   <CTA
-    headline="Ready to get started?"
-    sub="Short, direct, not pushy. Use the specific verb for what happens next."
-    ctaLabel="Book your visit"
+    headline="Send the vehicle details. Ahmad will take it from there."
+    sub="Tell us what you drive, where it's parked, and what level of clean you want."
+    ctaLabel="Book your detail"
+    ctaHref="#book"
   />
 </Base>

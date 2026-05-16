@@ -2,6 +2,7 @@
 interface Service {
   title: string;
   description: string;
+  price?: string;
 }
 
 interface Props {
@@ -13,26 +14,36 @@ interface Props {
 const { heading, intro, services } = Astro.props;
 ---
 
-<section class="section border-t border-[var(--color-border)]">
+<section class="section" id="services">
   <div class="container-page">
-    <div class="max-w-2xl">
+    <div class="mx-auto mb-14 max-w-2xl text-center">
+      <p class="eyebrow mb-4">Services</p>
       <h2>{heading}</h2>
-      {intro && <p class="mt-4 text-lg text-[var(--color-ink-muted)]">{intro}</p>}
+      {
+        intro && (
+          <p class="mx-auto mt-5 text-lg text-[var(--color-ink-muted)]">
+            {intro}
+          </p>
+        )
+      }
     </div>
 
-    <!-- Deliberately asymmetric: first item is bigger. Avoids AI-slop
-         "three identical cards" pattern. -->
-    <div class="mt-12 grid gap-8 md:grid-cols-6">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         services.map((service, i) => (
-          <article
-            class:list={[
-              "flex flex-col border-t border-[var(--color-border)] pt-6",
-              i === 0 ? "md:col-span-3 md:row-span-2" : "md:col-span-3",
-            ]}
-          >
-            <h3 class="text-xl font-semibold">{service.title}</h3>
-            <p class="mt-3 text-[var(--color-ink-muted)]">{service.description}</p>
+          <article class="card group flex flex-col p-7">
+            <span class="mb-5 flex size-10 items-center justify-center rounded-md bg-[var(--color-accent-soft)] font-sans text-sm font-bold text-[var(--color-accent)] ring-1 ring-[var(--color-accent)]/20">
+              0{i + 1}
+            </span>
+            <h3 class="text-xl font-semibold !not-italic">{service.title}</h3>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-ink-muted)]">
+              {service.description}
+            </p>
+            {service.price && (
+              <p class="mt-5 border-t border-[var(--color-border)] pt-4 font-sans text-sm font-bold tracking-wider uppercase text-[var(--color-accent)]">
+                {service.price}
+              </p>
+            )}
           </article>
         ))
       }

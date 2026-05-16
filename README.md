@@ -50,14 +50,14 @@ Then:
 
 ## Commands
 
-| Command             | What it does                                |
-| ------------------- | ------------------------------------------- |
-| `npm run dev`       | Local dev server at http://localhost:4321   |
-| `npm run build`     | Production build into `./dist`              |
-| `npm run preview`   | Preview the production build                |
-| `npm run check`     | TypeScript + Astro diagnostics              |
-| `npm run format`    | Prettier + Tailwind sort                    |
-| `npm run lighthouse`| Run Lighthouse CI against a local build     |
+| Command              | What it does                              |
+| -------------------- | ----------------------------------------- |
+| `npm run dev`        | Local dev server at http://localhost:4321 |
+| `npm run build`      | Production build into `./dist`            |
+| `npm run preview`    | Preview the production build              |
+| `npm run check`      | TypeScript + Astro diagnostics            |
+| `npm run format`     | Prettier + Tailwind sort                  |
+| `npm run lighthouse` | Run Lighthouse CI against a local build   |
 
 ## House rules
 

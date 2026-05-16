@@ -2,17 +2,20 @@
 import "@/styles/global.css";
 import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
+import { business } from "@/lib/site";
 
 interface Props {
   title: string;
   description: string;
   image?: string;
   canonical?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, image = "/og.png", canonical } = Astro.props;
-const siteUrl = Astro.site?.toString() ?? "https://example.com";
+const { title, description, image = "/og.png", canonical, jsonLd } = Astro.props;
+const siteUrl = Astro.site?.toString() ?? "https://spmobiledetailing.example.com";
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const schema = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 ---
 
 <!doctype html>
@@ -32,12 +35,18 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString(
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#080808" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      schema.map((item) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
+      ))
+    }
   </head>
-  <body>
+  <body class="min-h-screen">
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-[var(--color-accent)] focus:px-4 focus:py-2 focus:text-white"
@@ -45,7 +54,7 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString(
       Skip to content
     </a>
 
-    <Nav />
+    <Nav phone={business.phone} phoneHref={business.phoneHref} />
 
     <main id="main">
       <slot />

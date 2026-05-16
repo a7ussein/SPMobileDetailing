@@ -6,22 +6,38 @@ interface Props {
   ctaHref?: string;
 }
 
-const { headline, sub, ctaLabel = "Get in touch", ctaHref = "/contact" } = Astro.props;
+const {
+  headline,
+  sub,
+  ctaLabel = "Get in touch",
+  ctaHref = "/contact",
+} = Astro.props;
 ---
 
-<section class="section bg-[var(--color-ink)] text-[var(--color-bg)]">
-  <div class="container-page grid items-center gap-8 md:grid-cols-[2fr_1fr]">
-    <div>
-      <h2 class="max-w-[20ch] text-[var(--color-bg)]">{headline}</h2>
-      {sub && <p class="mt-4 max-w-prose text-lg opacity-80">{sub}</p>}
-    </div>
-    <div class="flex md:justify-end">
-      <a
-        href={ctaHref}
-        class="inline-flex items-center gap-2 rounded-md bg-[var(--color-bg)] px-6 py-3.5 font-medium text-[var(--color-ink)] transition-transform hover:-translate-y-0.5"
+<section class="section">
+  <div class="container-page">
+    <div
+      class="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-8 py-16 text-center md:px-16"
+    >
+      <!-- Accent glow -->
+      <div
+        class="pointer-events-none absolute -top-20 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-[var(--color-accent)] opacity-[0.06] blur-[80px]"
+        aria-hidden="true"
       >
-        {ctaLabel} &nbsp;→
-      </a>
+      </div>
+
+      <p class="eyebrow mb-5">Book the detail</p>
+      <h2 class="mx-auto max-w-[20ch]">{headline}</h2>
+      {
+        sub && (
+          <p class="mx-auto mt-5 max-w-prose text-lg text-[var(--color-ink-muted)]">
+            {sub}
+          </p>
+        )
+      }
+      <div class="mt-10">
+        <a href={ctaHref} class="btn-primary">{ctaLabel}</a>
+      </div>
     </div>
   </div>
 </section>

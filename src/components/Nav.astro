@@ -1,28 +1,44 @@
 ---
-const links = [
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+import { navLinks } from "@/lib/site";
+
+interface Props {
+  phone: string;
+  phoneHref: string;
+}
+
+const { phone, phoneHref } = Astro.props;
 ---
 
-<header class="border-b border-[var(--color-border)]">
+<header
+  class="fixed top-0 right-0 left-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4"
+  id="site-nav"
+>
   <nav
-    class="container-page flex h-16 items-center justify-between gap-6"
+    class="glass flex w-full max-w-4xl items-center justify-between gap-3 rounded-2xl px-4 py-2.5 shadow-[var(--shadow-nav)] ring-1 ring-[var(--color-border)]"
     aria-label="Primary"
   >
-    <a href="/" class="font-display text-lg font-semibold tracking-tight">
-      <!-- Replace with client wordmark or SVG logo -->
-      ClientName
+    <a href="/" class="flex min-w-0 items-center gap-2.5">
+      <img
+        src="/sp-logo.png"
+        alt="SP Detailing logo"
+        class="h-9 w-auto object-contain sm:h-10"
+        loading="eager"
+      />
+      <span
+        class="hidden font-display text-base font-medium italic tracking-wide text-[var(--color-ink)] sm:inline"
+      >
+        SP Detailing
+      </span>
     </a>
 
-    <ul class="hidden gap-8 md:flex">
+    <!-- Desktop links -->
+    <ul class="hidden gap-7 lg:flex">
       {
-        links.map((link) => (
+        navLinks.map((link) => (
           <li>
             <a
               href={link.href}
-              class="text-sm font-medium text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)]"
+              class="text-sm font-medium tracking-wide text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)]"
             >
               {link.label}
             </a>
@@ -31,6 +47,120 @@ const links = [
       }
     </ul>
 
-    <a href="/contact" class="btn-primary text-sm">Get in touch</a>
+    <div class="flex items-center gap-3">
+      <a
+        href={phoneHref}
+        class="hidden text-sm font-medium text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)] md:inline-flex"
+        aria-label={`Call ${phone}`}
+      >
+        {phone}
+      </a>
+      <a
+        href="#book"
+        class="btn-primary !min-h-0 !px-4 !py-2 !text-[11px] sm:!px-5 sm:!text-xs"
+      >
+        Book Now
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        id="mobile-menu-btn"
+        class="grid size-9 place-items-center rounded-lg text-[var(--color-ink-muted)] transition-colors hover:bg-[var(--color-surface-raised)] hover:text-[var(--color-ink)] lg:hidden"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          id="menu-icon-open"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          class="hidden h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          id="menu-icon-close"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
   </nav>
+
+  <!-- Mobile drawer -->
+  <div
+    id="mobile-menu"
+    class="glass absolute top-full right-3 left-3 mt-2 hidden rounded-2xl p-4 ring-1 ring-[var(--color-border)]"
+  >
+    <ul class="flex flex-col gap-1">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-ink-muted)] transition-colors hover:bg-[var(--color-surface-raised)] hover:text-[var(--color-ink)]"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="mt-2 border-t border-[var(--color-border)] pt-3">
+        <a
+          href={phoneHref}
+          class="block rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-ink-muted)]"
+        >
+          Call: {phone}
+        </a>
+      </li>
+    </ul>
+  </div>
 </header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden", isOpen);
+    iconOpen?.classList.toggle("hidden", !isOpen);
+    iconClose?.classList.toggle("hidden", isOpen);
+    btn.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  // Close menu on link click
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      iconOpen?.classList.remove("hidden");
+      iconClose?.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    const header = document.getElementById("site-nav");
+    if (!header?.contains(e.target as Node)) {
+      menu?.classList.add("hidden");
+      iconOpen?.classList.remove("hidden");
+      iconClose?.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+    }
+  });
+</script>
