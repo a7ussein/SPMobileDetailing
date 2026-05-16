@@ -385,7 +385,6 @@ export default function AdminDashboard() {
               { label: "Customer Name", value: editName, set: setEditName, type: "text" },
               { label: "Service", value: editService, set: setEditService, type: "text" },
               { label: "Date", value: editDate, set: setEditDate, type: "date" },
-              { label: "Time", value: editTime, set: setEditTime, type: "text" },
               { label: "Phone", value: editPhone, set: setEditPhone, type: "text" },
             ].map(f => (
               <div key={f.label} style={{ marginBottom: 16 }}>
@@ -393,6 +392,12 @@ export default function AdminDashboard() {
                 <input type={f.type} value={f.value} onChange={e => f.set(e.target.value)} style={adminInput} />
               </div>
             ))}
+            <div style={{ marginBottom: 16 }}>
+              <label style={adminLabel}>Time</label>
+              <select value={editTime} onChange={e => setEditTime(e.target.value)} style={adminInput}>
+                {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </div>
             <div style={{ marginBottom: 16 }}>
               <label style={adminLabel}>Status</label>
               <select value={editStatus} onChange={e => setEditStatus(e.target.value)} style={adminInput}>
