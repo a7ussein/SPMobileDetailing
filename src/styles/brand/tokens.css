@@ -3,19 +3,19 @@
   --font-sans: "Outfit Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Cormorant Garamond Variable", "Georgia", ui-serif, serif;
 
-  /* Color — dark premium automotive, matched to the SP Detailing logo */
-  --color-bg: #080808;
-  --color-surface: #111111;
-  --color-surface-raised: #1a1a1a;
-  --color-ink: #f0ede8;
-  --color-ink-muted: #8c8580;
-  --color-border: #252220;
+  /* Color — clean white background with dark text and red accent */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-raised: #ffffff;
+  --color-ink: #111111;
+  --color-ink-muted: #6b7280;
+  --color-border: #e5e7eb;
   --color-accent: #c8102e;
   --color-accent-hover: #e01535;
-  --color-accent-soft: #1f0a0e;
+  --color-accent-soft: #fef2f2;
   --color-accent-ink: #ffffff;
-  --color-chrome: #d4cfc7;
-  --color-chrome-muted: #6d665f;
+  --color-chrome: #1f2937;
+  --color-chrome-muted: #9ca3af;
 
   /* Spacing — 8px grid */
   --spacing: 0.25rem;
@@ -27,11 +27,11 @@
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* Shadows — warm-tinted depth on dark canvas */
-  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.3), 0 4px 20px rgb(0 0 0 / 0.25);
-  --shadow-card-hover: 0 4px 12px rgb(0 0 0 / 0.4), 0 12px 40px rgb(0 0 0 / 0.3);
-  --shadow-float: 0 8px 32px rgb(0 0 0 / 0.5);
-  --shadow-nav: 0 4px 24px rgb(0 0 0 / 0.4);
+  /* Shadows — soft shadows on light canvas */
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.05), 0 4px 20px rgb(0 0 0 / 0.05);
+  --shadow-card-hover: 0 4px 12px rgb(0 0 0 / 0.08), 0 12px 40px rgb(0 0 0 / 0.1);
+  --shadow-float: 0 8px 32px rgb(0 0 0 / 0.12);
+  --shadow-nav: 0 4px 24px rgb(0 0 0 / 0.06);
   --shadow-glow: 0 0 40px rgb(200 16 46 / 0.15);
 
   /* Motion */

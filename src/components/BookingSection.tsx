@@ -8,8 +8,6 @@ const services = [
   { id: "exterior", name: "Exterior Wash", price: "$75", duration: "60 min", desc: "Hand wash, wheels, tires, glass" },
   { id: "interior", name: "Interior Detail", price: "$120", duration: "90 min", desc: "Vacuum, plastics, spot treatment" },
   { id: "full", name: "Full Detail", price: "$200", duration: "120 min", desc: "Complete interior + exterior reset" },
-  { id: "ceramic", name: "Ceramic Sealant", price: "$300", duration: "180 min", desc: "Long-lasting paint protection" },
-  { id: "headlight", name: "Headlight Restore", price: "$60", duration: "45 min", desc: "Remove yellowing, restore clarity" },
 ];
 
 /* ===== TYPES ===== */

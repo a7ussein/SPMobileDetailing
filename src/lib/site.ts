@@ -11,7 +11,7 @@ export const business = {
     "Portland, South Portland, Bangor, Lewiston, Augusta, and nearby Maine communities",
   hours: "Mon-Sat, 8am-6pm",
   shortDescription:
-    "Mobile car detailing across Maine with exterior washes, interior details, decontamination, sealants, and headlight restoration brought to your driveway.",
+    "Premium mobile car detailing across Maine with exterior washes and interior details brought directly to your driveway.",
 };
 
 export const navLinks = [
